@@ -17,6 +17,11 @@ Create a MySQL database and configure the .env file.
 
 Using Postman, Insomnia, Talend API Tester, etc
 
+
+![alt text](https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/116569574/original/7b057f444a9fcbab7c70828c051ae41b8609adba/build-a-rest-api-using-golang.png)
+
+
+
 ## Usage
 
 ```html
@@ -28,7 +33,7 @@ $ go run main.go
 
 Follow the following steps and you're good to go! Important:
 
-![alt text]()
+![alt text](https://raw.githubusercontent.com/koltyakov/gosip-docs/master/.gitbook/assets/fluent.gif)
 
 ## Coding
 
@@ -36,7 +41,11 @@ Follow the following steps and you're good to go! Important:
 
 ```go
 ...
-
+type task struct {
+	ID      int    `json:'ID'`
+	Name    string `json:'Name'`
+	Content string `json:'Content'`
+}
 ...
 ```
 
