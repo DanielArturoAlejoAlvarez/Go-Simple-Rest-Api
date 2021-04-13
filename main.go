@@ -78,6 +78,23 @@ func createTask(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(newTask)
 }
 
+func deleteTask(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	taskID, err := strconv.Atoi(params["id"])
+
+	if err != nil {
+		fmt.Fprintf(w, "ID invalid!")
+		return
+	}
+
+	for i, t := range tasks {
+		if t.ID == taskID {
+			tasks = append(tasks[:i], tasks[i+1:]...)
+			fmt.Fprintf(w, "Task with ID %v has been remove successfully!", taskID)
+		}
+	}
+}
+
 func indexRoute(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome a my REST API")
 }
@@ -90,6 +107,8 @@ func main() {
 	router.HandleFunc("/api/tasks", getTasks).Methods("GET")
 	router.HandleFunc("/api/tasks/{id}", getTask).Methods("GET")
 	router.HandleFunc("/api/tasks", createTask).Methods("POST")
+
+	router.HandleFunc("/api/tasks/{id}", deleteTask).Methods("DELETE")
 
 	log.Fatal(http.ListenAndServe(":9000", router))
 }
